@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class CarMove : MonoBehaviour
 {
-    
-    private const int Acceleration = 20;
+    private const int Acceleration = 15;
     private Transform _target;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     private void Update()
@@ -32,7 +25,7 @@ public class CarMove : MonoBehaviour
             direction = Vector3.back;
             transform.Translate(direction * speed);  
         }  
-         
+
         //the left and right arrows can be ued to control the direction in conjunction with the backwards/forwards movement
         if (Input.GetKey(KeyCode.LeftArrow))  
         {  
@@ -42,6 +35,16 @@ public class CarMove : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))  
         {  
             transform.Rotate(Vector3.up, 10);  
-        }  
+        }
+    }
+
+    //Event
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (!collision.gameObject.CompareTag("Finish") && !collision.gameObject.CompareTag("OOB")) 
+            return;
+
+        GameOverMenu menu = FindObjectOfType<GameOverMenu>(true);
+        menu.ToggleMenu(true);
     }
 }
