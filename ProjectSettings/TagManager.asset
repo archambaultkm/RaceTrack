@@ -6,6 +6,7 @@ TagManager:
   tags:
   - OOB
   - GameOver
+  - GameControls
   layers:
   - Default
   - TransparentFX
